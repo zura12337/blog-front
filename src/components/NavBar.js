@@ -30,6 +30,9 @@ export default function NavBar() {
           _hover={{
             textDecoration: 'none',
           }}
+          _focus={{
+            outline: 'none',
+          }}
           px={10}
           fontFamily={'logo_font'}
           fontWeight={'bold'}
@@ -45,7 +48,11 @@ export default function NavBar() {
               _hover={{
                 textDecoration: 'none',
               }}
+              _focus={{
+                outline: 'none',
+              }}
               href="/bookmarks"
+              fontWeight="bold"
             >
               Bookmarks
             </Link>
