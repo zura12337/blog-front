@@ -7,34 +7,30 @@ import {
   VStack,
   Code,
   Grid,
-  theme,
+  extendTheme,
 } from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+import NavBar from './components/NavBar';
+import Fonts from './Fonts';
+const theme = extendTheme({
+  colors: {
+    transparent: 'transparent',
+    black: '#232323',
+    white: '#F5F5F5',
+    gray: {
+      dark: '#777777',
+      light: '#F5F5F5',
+    },
+  },
+  shadows: {
+    sm: '0 2px 10px rgba(0,0,0,.15)',
+  },
+});
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
-      </Box>
+      <Fonts />
+      <NavBar />
     </ChakraProvider>
   );
 }
