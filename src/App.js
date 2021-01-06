@@ -4,6 +4,7 @@ import NavBar from './components/NavBar';
 import Fonts from './Fonts';
 import { getLatestBlogs } from './services/index';
 import Slider from './components/Slider';
+import Footer from './components/Footer';
 
 const theme = extendTheme({
   colors: {
@@ -36,6 +37,7 @@ function App() {
       <Fonts />
       <NavBar />
       <Slider latestBlogs={blogs} />
+      <Footer />
     </ChakraProvider>
   );
 }
