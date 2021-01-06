@@ -5,7 +5,7 @@ import { RiNewspaperFill } from 'react-icons/ri';
 
 export default function Slider({ latestBlogs }) {
   return (
-    <Box h="70vh" w="60vw" ml="20vw" mt="10vh" backgroundColor="gray">
+    <Box h="90vh" w="60vw" ml="20vw" mt="10vh" backgroundColor="gray">
       <Flex h="40px">
         <RiNewspaperFill fill="#232323" size="18px" />
         <Text
