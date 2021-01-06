@@ -1,45 +1,54 @@
-import { Box, Flex, Image, Link, Text } from '@chakra-ui/react';
+import { Box, Flex, Link, Text } from '@chakra-ui/react';
 import React from 'react';
 import { Slide } from 'react-slideshow-image';
+import { RiNewspaperFill } from 'react-icons/ri';
 
 export default function Slider({ latestBlogs }) {
   return (
-    <Box
-      h="40vh"
-      w="60vw"
-      ml="20vw"
-      mt="10vh"
-      borderRadius="15px"
-      overflow="hidden"
-    >
+    <Box h="50vh" w="60vw" ml="20vw" mt="10vh">
+      <Flex h="40px">
+        <RiNewspaperFill fill="#232323" size="18px" />
+        <Text
+          fontWeight="bold"
+          display="flex"
+          height="18px"
+          alignItems="center"
+          fontSize="18px"
+          ml="5px"
+        >
+          Latest News
+        </Text>
+      </Flex>
       {latestBlogs && (
-        <Slide>
-          {latestBlogs.map(blog => (
-            <Link
-              _hover={{ textDecoration: 'none' }}
-              textDecoration="none"
-              href={`/blog/${blog.id}`}
-            >
-              <Flex
-                alignItems="flex-end"
-                h={'40vh'}
-                backgroundImage={`linear-gradient(0deg, rgba(0,0,0,.45) 0%, rgba(255,255,255,0) 100%), url(http://localhost${blog.fieldImage.uri.url})`}
-                backgroundSize="cover"
+        <Box borderRadius="15px" overflow="hidden">
+          <Slide>
+            {latestBlogs.map(blog => (
+              <Link
+                _hover={{ textDecoration: 'none' }}
+                textDecoration="none"
+                href={`/blog/${blog.id}`}
               >
-                <Text
-                  fontWeight="bold"
-                  color="white"
-                  fontSize="30px"
-                  verticalAlign="bottom"
-                  key={blog.id}
-                  p="50px 60px"
+                <Flex
+                  alignItems="flex-end"
+                  h={'50vh'}
+                  backgroundImage={`linear-gradient(0deg, rgba(0,0,0,.45) 0%, rgba(255,255,255,0) 100%), url(http://localhost${blog.fieldImage.uri.url})`}
+                  backgroundSize="cover"
                 >
-                  {blog.title}
-                </Text>
-              </Flex>
-            </Link>
-          ))}
-        </Slide>
+                  <Text
+                    fontWeight="bold"
+                    color="white"
+                    fontSize="30px"
+                    verticalAlign="bottom"
+                    key={blog.id}
+                    p="30px 60px"
+                  >
+                    {blog.title}
+                  </Text>
+                </Flex>
+              </Link>
+            ))}
+          </Slide>
+        </Box>
       )}
     </Box>
   );
