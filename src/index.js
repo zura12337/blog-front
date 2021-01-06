@@ -1,12 +1,13 @@
 import { ColorModeScript } from '@chakra-ui/react';
-import React, { StrictMode } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import 'react-slideshow-image/dist/styles.css';
 
 ReactDOM.render(
-  <StrictMode>
+  <React.StrictMode>
     <ColorModeScript />
     <App />
-  </StrictMode>,
+  </React.StrictMode>,
   document.getElementById('root')
 );

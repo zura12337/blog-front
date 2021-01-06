@@ -5,14 +5,11 @@ import {
   Link,
   Heading,
   Text,
-  useColorMode,
   useColorModeValue,
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 
 export default function NavBar() {
-  const { colorMode, toggleColorMode } = useColorMode();
-
   const btnBg = useColorModeValue('yellow.300', 'yellow.500');
   return (
     <Flex

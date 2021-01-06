@@ -1,16 +1,10 @@
-import React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  extendTheme,
-} from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import NavBar from './components/NavBar';
 import Fonts from './Fonts';
+import { getLatestBlogs } from './services/index';
+import Slider from './components/Slider';
+
 const theme = extendTheme({
   colors: {
     transparent: 'transparent',
@@ -27,10 +21,21 @@ const theme = extendTheme({
 });
 
 function App() {
+  const [blogs, setBlogs] = useState([]);
+
+  const getBlogs = async () => {
+    const { data: blogs } = await getLatestBlogs(10);
+    setBlogs(blogs);
+    console.log(blogs);
+  };
+  useEffect(() => {
+    getBlogs();
+  }, []);
   return (
     <ChakraProvider theme={theme}>
       <Fonts />
       <NavBar />
+      <Slider latestBlogs={blogs} />
     </ChakraProvider>
   );
 }
