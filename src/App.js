@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { Box, ChakraProvider, extendTheme } from '@chakra-ui/react';
 import NavBar from './components/NavBar';
 import Fonts from './Fonts';
 import { getLatestBlogs } from './services/index';
