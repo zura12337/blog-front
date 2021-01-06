@@ -5,7 +5,7 @@ import { RiNewspaperFill } from 'react-icons/ri';
 
 export default function Slider({ latestBlogs }) {
   return (
-    <Box h="50vh" w="60vw" ml="20vw" mt="10vh">
+    <Box h="70vh" w="60vw" ml="20vw" mt="10vh">
       <Flex h="40px">
         <RiNewspaperFill fill="#232323" size="18px" />
         <Text
@@ -20,7 +20,11 @@ export default function Slider({ latestBlogs }) {
         </Text>
       </Flex>
       {latestBlogs && (
-        <Box borderRadius="15px" overflow="hidden">
+        <Box
+          borderRadius="15px"
+          overflow="hidden"
+          boxShadow="0 2px 5px rgba(0,0,0,.25)"
+        >
           <Slide>
             {latestBlogs.map(blog => (
               <Link
@@ -30,7 +34,7 @@ export default function Slider({ latestBlogs }) {
               >
                 <Flex
                   alignItems="flex-end"
-                  h={'50vh'}
+                  h={'70vh'}
                   backgroundImage={`linear-gradient(0deg, rgba(0,0,0,.45) 0%, rgba(255,255,255,0) 100%), url(http://localhost${blog.fieldImage.uri.url})`}
                   backgroundSize="cover"
                 >
