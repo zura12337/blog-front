@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Box, ChakraProvider, extendTheme } from '@chakra-ui/react';
+import React from 'react';
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import NavBar from './components/NavBar';
 import Fonts from './Fonts';
-import { getLatestBlogs } from './services/index';
-import Slider from './components/Slider';
 import Footer from './components/Footer';
+import { Switch, Route } from 'react-router-dom';
+import HomePage from './pages/home/index';
 
 const theme = extendTheme({
   colors: {
@@ -22,21 +22,13 @@ const theme = extendTheme({
 });
 
 function App() {
-  const [blogs, setBlogs] = useState([]);
-
-  const getBlogs = async () => {
-    const { data: blogs } = await getLatestBlogs(10);
-    setBlogs(blogs);
-    console.log(blogs);
-  };
-  useEffect(() => {
-    getBlogs();
-  }, []);
   return (
     <ChakraProvider theme={theme}>
       <Fonts />
       <NavBar />
-      <Slider latestBlogs={blogs} />
+      <Switch>
+        <Route path="/" component={HomePage} />
+      </Switch>
       <Footer />
     </ChakraProvider>
   );
