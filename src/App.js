@@ -25,7 +25,6 @@ const theme = extendTheme({
   fonts: {
     logo_font: 'Libre Baskerville',
     body: 'Martel Sans',
-    lato: 'Lato',
   },
 });
 

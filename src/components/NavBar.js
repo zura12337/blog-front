@@ -49,7 +49,9 @@ export default function NavBar() {
                 outline: 'none',
               }}
               href="/bookmarks"
+              fontFamily={'heading'}
               fontWeight="bold"
+              fontSize={14}
             >
               Bookmarks
             </Link>
