@@ -9,8 +9,8 @@ export default function BlogPage({ match }) {
 
   const getBlog = async () => {
     const { data: blog } = await getBlogById(id);
+    blog[0].body.value = blog[0].body.value.replace(/<\/?[^>]+(>|$)/g, '');
     setBlog(blog[0]);
-    console.log(blog[0]);
   };
 
   useEffect(() => {

@@ -22,8 +22,10 @@ export default function BlogTeaser({ blog }) {
               </Text>
               <Text fontSize={12} color="gray.dark">
                 {blog.body.value.length > 250
-                  ? blog.body.value.slice(0, 250) + '...'
-                  : blog.body.value}
+                  ? blog.body.value
+                      .slice(0, 250)
+                      .replace(/<\/?[^>]+(>|$)/g, '') + '...'
+                  : blog.body.value.replace(/<\/?[^>]+(>|$)/g, '')}
               </Text>
             </Link>
           </Box>
