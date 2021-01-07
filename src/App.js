@@ -34,11 +34,11 @@ function App() {
     <ChakraProvider theme={theme}>
       <Fonts />
       <NavBar />
-      {/*       <Switch>
+      <Switch>
         <Route path="/blogs/" component={BlogListingPage} />
         <Route path="/blog/:id" component={BlogPage} />
         <Route path="/" component={HomePage} />
-      </Switch> */}
+      </Switch>
       <Footer />
     </ChakraProvider>
   );
