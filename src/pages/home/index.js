@@ -18,7 +18,7 @@ export default function HomePage() {
   const getData = async () => {
     setLoading(true);
     const [{ data: blogs }, { data: topics }] = await Promise.all([
-      getLatestBlogs(5),
+      getLatestBlogs(4),
       getTopics(),
     ]);
     setLoading(false);

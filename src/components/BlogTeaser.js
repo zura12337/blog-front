@@ -1,8 +1,37 @@
-import { Box, Button, Flex, Image, Link, Text } from '@chakra-ui/react';
-import React from 'react';
-import { BsBookmarkPlus } from 'react-icons/bs';
+import { Box, Flex, Image, Link, Text } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import { BsBookmarkPlus, BsBookmarkFill } from 'react-icons/bs';
 
-export default function BlogTeaser({ blog }) {
+export default function BlogTeaser({
+  blog,
+  setBookmarkedBlogs,
+  bookmarkedBlogs,
+}) {
+  const [bookmark, setBookmark] = useState(false);
+
+  useEffect(() => {
+    for (let bookmarkedBlog of bookmarkedBlogs) {
+      if (bookmarkedBlog.id === blog.id) {
+        setBookmark(true);
+        break;
+      }
+    }
+  }, []);
+
+  const handleBookmarkSave = () => {
+    setTimeout(() => {
+      setBookmark(!bookmark);
+      if (bookmark === true) {
+        if (window.location.pathname === '/bookmarks') {
+          window.location.reload();
+        }
+        setBookmarkedBlogs(blogs => blogs.filter(b => b.id !== blog.id));
+      } else {
+        setBookmarkedBlogs([...bookmarkedBlogs, blog]);
+      }
+    }, 200);
+  };
+
   return (
     <Box
       w={'100%'}
@@ -30,15 +59,19 @@ export default function BlogTeaser({ blog }) {
             </Link>
           </Box>
           <Box mt={1}>
-            <button style={{ outline: 'none' }}>
-              <BsBookmarkPlus size={17} />
+            <button onClick={handleBookmarkSave} style={{ outline: 'none' }}>
+              {bookmark ? (
+                <BsBookmarkFill size={17} />
+              ) : (
+                <BsBookmarkPlus size={17} />
+              )}
             </button>
           </Box>
           <Box>
             <Image
               position="absolute"
               right="15px"
-              w={'33%'}
+              w={'30%'}
               h={'80%'}
               objectFit="fill"
               src={`http://localhost${blog.fieldImage.uri.url}`}

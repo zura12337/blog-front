@@ -44,7 +44,7 @@ export default function BlogPage({ match }) {
               </Text>
               <br />
               <Text fontSize={14} color="gray.dark">
-                {blog.body.value.split(' ').slice(5).join()}
+                {blog.body.value.split(' ').slice(5).join(' ')}
               </Text>
             </Box>
           )}
