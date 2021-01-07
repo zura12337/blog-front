@@ -4,7 +4,7 @@ import BlogTeaser from './BlogTeaser';
 
 export default function BlogListing({ blogs }) {
   return (
-    <Box mx={10}>
+    <Box w={'100%'} mx={10}>
       {blogs.map(blog => (
         <BlogTeaser key={blog.id} blog={blog} />
       ))}

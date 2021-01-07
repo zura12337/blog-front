@@ -4,7 +4,7 @@ import React from 'react';
 export default function Topics({ topics }) {
   return (
     <Box
-      w={'100%'}
+      w={'70%'}
       borderRadius={10}
       px={'35px'}
       py={15}
