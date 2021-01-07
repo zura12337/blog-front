@@ -2,7 +2,7 @@ import { Box, Button, Flex, Image, Link, Text } from '@chakra-ui/react';
 import React from 'react';
 import { BsBookmarkPlus } from 'react-icons/bs';
 
-export default function BlogTeaser() {
+export default function BlogTeaser({ blog }) {
   return (
     <Box
       w={650}
@@ -18,12 +18,12 @@ export default function BlogTeaser() {
           <Box w="60%">
             <Link href={'/blog/'} _hover={{ textDecoration: 'none' }}>
               <Text fontWeight="bold" fontFamily="body" fontSize={16}>
-                5 Simple Things I removed from My Life to become happier
+                {blog.title}
               </Text>
               <Text fontSize={12} color="gray.dark">
-                Gravida sollicitudin mollis irure veritatis dictum. Sit turpis!
-                Volutpat bibendum? Do, earum delectus interdum, sint
-                voluptatibus adipiscing recusandae fames. Aliqua digniss
+                {blog.body.value.length > 250
+                  ? blog.body.value.slice(0, 250) + '...'
+                  : blog.body.value}
               </Text>
             </Link>
           </Box>
@@ -39,7 +39,7 @@ export default function BlogTeaser() {
               w={'33%'}
               h={'80%'}
               objectFit="fill"
-              src={'/assets/sample.png'}
+              src={`http://localhost${blog.fieldImage.uri.url}`}
               borderRadius={5}
               boxShadow="0 0 5px rgba(0,0,0,.4)"
               alt="blog-teaser-img"

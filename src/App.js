@@ -37,11 +37,6 @@ function App() {
       <Switch>
         <Route path="/" component={HomePage} />
       </Switch>
-      <Box py={50} px={100} background="solidWhite" borderTop="1px solid gray">
-        <BlogTeaser />
-        <BlogTeaser />
-        <BlogTeaser />
-      </Box>
       <Footer />
     </ChakraProvider>
   );

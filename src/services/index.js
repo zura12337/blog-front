@@ -11,3 +11,12 @@ export const getLatestBlogs = async (limit = '') => {
   const data = body;
   return data;
 };
+
+export const getTopics = async () => {
+  const response = await superagent.get(
+    'http://localhost/omedia-exercise/web/api/taxonomy_term/topic?sort=weight'
+  );
+  const body = response.body;
+  const data = body;
+  return data;
+};
