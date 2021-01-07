@@ -5,7 +5,7 @@ import { BsBookmarkPlus } from 'react-icons/bs';
 export default function BlogTeaser({ blog }) {
   return (
     <Box
-      w={650}
+      w={'100%'}
       h={180}
       mb={5}
       backgroundColor="gray.100"

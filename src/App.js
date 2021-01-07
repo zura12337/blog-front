@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import { Switch, Route } from 'react-router-dom';
 import HomePage from './pages/home/index';
 import BlogPage from './pages/blog';
+import BlogListingPage from './pages/blogs';
 
 const theme = extendTheme({
   colors: {
@@ -34,6 +35,7 @@ function App() {
       <Fonts />
       <NavBar />
       <Switch>
+        <Route path="/blogs/" component={BlogListingPage} />
         <Route path="/blog/:id" component={BlogPage} />
         <Route path="/" component={HomePage} />
       </Switch>

@@ -1,5 +1,6 @@
 import { Box, Flex, useColorModeValue } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
+import BlogListing from '../../components/BlogListing';
 import BlogTeaser from '../../components/BlogTeaser';
 import Slider from '../../components/Slider';
 import Topics from '../../components/Topics';
@@ -28,11 +29,7 @@ export default function HomePage() {
     <>
       <Slider latestBlogs={latestBlogs} />
       <Flex py={50} px={100} background={background} borderTop="1px solid gray">
-        <Box mx={10}>
-          {blogs.map(blog => (
-            <BlogTeaser key={blog.id} blog={blog} />
-          ))}
-        </Box>
+        <BlogListing blogs={blogs} />
         <Topics topics={topics} />
       </Flex>
     </>
