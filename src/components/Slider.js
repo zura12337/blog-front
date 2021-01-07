@@ -28,6 +28,7 @@ export default function Slider({ latestBlogs }) {
           <Slide>
             {latestBlogs.map(blog => (
               <Link
+                key={blog.id}
                 _hover={{ textDecoration: 'none' }}
                 textDecoration="none"
                 href={`/blog/${blog.id}`}

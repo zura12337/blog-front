@@ -10,7 +10,7 @@ export default function HomePage() {
   const [latestBlogs, setLatestBlogs] = useState([]);
   const [topics, setTopics] = useState([]);
 
-  const background = useColorModeValue('white', 'dark');
+  const background = useColorModeValue('solidWhite', 'dark');
 
   const getBlogs = async () => {
     const [{ data: blogs }, { data: topics }] = await Promise.all([
@@ -30,7 +30,7 @@ export default function HomePage() {
       <Flex py={50} px={100} background={background} borderTop="1px solid gray">
         <Box mx={10}>
           {blogs.map(blog => (
-            <BlogTeaser blog={blog} />
+            <BlogTeaser key={blog.id} blog={blog} />
           ))}
         </Box>
         <Topics topics={topics} />

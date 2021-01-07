@@ -17,6 +17,7 @@ export default function Topics({ topics }) {
       <Box>
         {topics.map(topic => (
           <Link
+            key={topic.id}
             _hover={{
               textDecoration: 'none',
             }}
