@@ -12,7 +12,7 @@ import React from 'react';
 
 export default function Footer() {
   return (
-    <Box bg="black" w="100%" h="50vh" mt="30vh">
+    <Box bg="black" w="100%" h="48vh" mt="40vh">
       <Flex justifyContent="space-between" px={100} py={10}>
         <Heading>
           <Link
@@ -55,7 +55,7 @@ export default function Footer() {
               placeholder="Message"
             ></Textarea>
             <Button position="absolute" right="0" top="100%" fontSize="14px">
-              Send!
+              Send
             </Button>
           </form>
         </Box>

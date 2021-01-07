@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import BlogListing from '../../components/BlogListing';
 import { getLatestBlogsOffset } from '../../services/index';
 import queryString from 'query-string';
+import Loading from '../../components/Loading';
 
 export default function BlogListingPage() {
   const [blogs, setBlogs] = useState([]);
@@ -32,38 +33,42 @@ export default function BlogListingPage() {
   }, []);
 
   return (
-    <Box w={'60%'} m="auto" mt={'80px'}>
-      {blogs && blogs.length > 0 ? (
-        <>
-          <BlogListing blogs={blogs} />
-          {links && (
-            <Flex justifyContent="center" mt={50}>
-              {links.prev && (
-                <Link
-                  m={1}
-                  _hover={{ textDecoration: 'none' }}
-                  href={`/blogs/?page=${numericPage - 1}`}
-                >
-                  <Button>Prev</Button>
-                </Link>
-              )}
-              {links.next && (
-                <Link
-                  m={1}
-                  _hover={{ textDecoration: 'none' }}
-                  href={`/blogs/?page=${numericPage + 1}`}
-                >
-                  <Button>Next</Button>
-                </Link>
-              )}
-            </Flex>
-          )}
-        </>
-      ) : (
-        <Text textAlign="center" fontSize={30}>
-          No Blogs Posted Yet.
-        </Text>
-      )}
-    </Box>
+    <>
+      <Box w={'60%'} m="auto" mt={'80px'}>
+        {blogs && !loading ? (
+          <>
+            <BlogListing blogs={blogs} />
+            {links && (
+              <Flex justifyContent="center" mt={50}>
+                {links.prev && (
+                  <Link
+                    m={1}
+                    _hover={{ textDecoration: 'none' }}
+                    href={`/blogs/?page=${numericPage - 1}`}
+                  >
+                    <Button>Prev</Button>
+                  </Link>
+                )}
+                {links.next && (
+                  <Link
+                    m={1}
+                    _hover={{ textDecoration: 'none' }}
+                    href={`/blogs/?page=${numericPage + 1}`}
+                  >
+                    <Button>Next</Button>
+                  </Link>
+                )}
+              </Flex>
+            )}
+          </>
+        ) : !loading ? (
+          <Text textAlign="center" fontSize={30}>
+            No Blogs Posted Yet.
+          </Text>
+        ) : (
+          <Loading loading={loading} />
+        )}
+      </Box>
+    </>
   );
 }
