@@ -1,11 +1,11 @@
 import React from 'react';
-import { Box, ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import NavBar from './components/NavBar';
 import Fonts from './Fonts';
 import Footer from './components/Footer';
 import { Switch, Route } from 'react-router-dom';
 import HomePage from './pages/home/index';
-import BlogTeaser from './components/BlogTeaser';
+import BlogPage from './pages/blog';
 
 const theme = extendTheme({
   colors: {
@@ -34,6 +34,7 @@ function App() {
       <Fonts />
       <NavBar />
       <Switch>
+        <Route path="/blog/:id" component={BlogPage} />
         <Route path="/" component={HomePage} />
       </Switch>
       <Footer />

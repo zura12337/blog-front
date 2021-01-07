@@ -16,7 +16,7 @@ export default function BlogTeaser({ blog }) {
       <Box p={15}>
         <Flex positoin="relative">
           <Box w="60%">
-            <Link href={'/blog/'} _hover={{ textDecoration: 'none' }}>
+            <Link href={`/blog/${blog.id}`} _hover={{ textDecoration: 'none' }}>
               <Text fontWeight="bold" fontFamily="body" fontSize={16}>
                 {blog.title}
               </Text>
