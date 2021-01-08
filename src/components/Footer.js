@@ -9,13 +9,13 @@ import {
   ListItem,
   Text,
   Textarea,
-} from '@chakra-ui/react';
-import React from 'react';
+} from "@chakra-ui/react";
+import React from "react";
 
 export default function Footer() {
   return (
     <Box
-      bg="black"
+      bg="gray.900"
       w="100%"
       minHeight="48vh"
       h="max-content"
@@ -27,14 +27,14 @@ export default function Footer() {
           <Link
             href="/"
             _hover={{
-              textDecoration: 'none',
+              textDecoration: "none",
             }}
             _focus={{
-              outline: 'none',
+              outline: "none",
             }}
             color="white"
-            fontFamily={'logo_font'}
-            fontWeight={'bold'}
+            fontFamily={"logo_font"}
+            fontWeight={"bold"}
             textDecoration="none"
           >
             Blog
@@ -51,7 +51,7 @@ export default function Footer() {
         <Box position="relative" mr={100} mt={10}>
           <Text
             color="white"
-            fontFamily={'logo_font'}
+            fontFamily={"logo_font"}
             fontSize="28px"
             fontWeight="bold"
           >
@@ -86,11 +86,11 @@ const FooterItem = ({ title, href }) => {
     <Link
       href={href}
       _hover={{
-        textDecoration: 'none',
-        color: 'gray.300',
+        textDecoration: "none",
+        color: "gray.300",
       }}
       fontWeight="light"
-      _focus={{ outline: 'none' }}
+      _focus={{ outline: "none" }}
     >
       {title}
     </Link>

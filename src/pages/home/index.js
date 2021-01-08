@@ -1,19 +1,18 @@
 import {
   Box,
   Button,
-  Flex,
   Grid,
   GridItem,
   Link,
   useColorModeValue,
-} from '@chakra-ui/react';
-import React, { useState, useEffect } from 'react';
-import BlogListing from '../../components/BlogListing';
-import Slider from '../../components/Slider';
-import Topics from '../../components/Topics';
-import Loading from '../../components/Loading';
+} from "@chakra-ui/react";
+import React, { useState, useEffect } from "react";
+import BlogListing from "../../components/BlogListing";
+import Slider from "../../components/Slider";
+import Topics from "../../components/Topics";
+import Loading from "../../components/Loading";
 
-import { getLatestBlogs, getTopics } from '../../services';
+import { getLatestBlogs, getTopics } from "../../services";
 
 export default function HomePage() {
   const [blogs, setBlogs] = useState([]);
@@ -21,7 +20,7 @@ export default function HomePage() {
   const [topics, setTopics] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const background = useColorModeValue('solidWhite', 'dark');
+  const background = useColorModeValue("solidWhite", "dark");
 
   const getData = async () => {
     setLoading(true);
@@ -50,12 +49,12 @@ export default function HomePage() {
         <GridItem>
           <BlogListing blogs={blogs} />
         </GridItem>
-        <GridItem mt={'80px'}>
+        <GridItem mt={"80px"}>
           <Topics topics={topics} />
         </GridItem>
       </Grid>
-      <Box py={10} px={'28%'} background={background}>
-        <Link _hover={{ textDecoration: 'none' }} href="/blogs">
+      <Box py={10} px={"28%"} background={background}>
+        <Link _hover={{ textDecoration: "none" }} href="/blogs">
           <Button>See More</Button>
         </Link>
       </Box>

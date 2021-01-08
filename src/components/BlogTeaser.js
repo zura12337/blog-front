@@ -1,12 +1,21 @@
-import { Box, Flex, Image, Link, Text } from '@chakra-ui/react';
-import React, { useContext, useEffect, useState } from 'react';
-import { BsBookmarkPlus, BsBookmarkFill } from 'react-icons/bs';
+import {
+  Box,
+  Flex,
+  Image,
+  Link,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
+import React, { useContext, useEffect, useState } from "react";
+import { BsBookmarkPlus, BsBookmarkFill } from "react-icons/bs";
 
-import { BookmarksContext } from '../context/index';
+import { BookmarksContext } from "../context/index";
 
 export default function BlogTeaser({ blog }) {
   const [bookmark, setBookmark] = useState(false);
   const { bookmarkedBlogs, setBookmarkedBlogs } = useContext(BookmarksContext);
+
+  const backgroundcolor = useColorModeValue("gray.100", "gray.700");
 
   useEffect(() => {
     for (let bookmarkedBlog of bookmarkedBlogs) {
@@ -21,10 +30,10 @@ export default function BlogTeaser({ blog }) {
     setTimeout(() => {
       setBookmark(!bookmark);
       if (bookmark === true) {
-        if (window.location.pathname === '/bookmarks') {
+        if (window.location.pathname === "/bookmarks") {
           window.location.reload();
         }
-        setBookmarkedBlogs(blogs => blogs.filter(b => b.id !== blog.id));
+        setBookmarkedBlogs((blogs) => blogs.filter((b) => b.id !== blog.id));
       } else {
         setBookmarkedBlogs([...bookmarkedBlogs, blog]);
       }
@@ -33,10 +42,10 @@ export default function BlogTeaser({ blog }) {
 
   return (
     <Box
-      w={'100%'}
+      w={"100%"}
       h={180}
       mb={5}
-      backgroundColor="gray.100"
+      backgroundColor={backgroundcolor}
       borderRadius={10}
       boxShadow="0 1px 5px rgba(0,0,0,.2)"
       position="relative"
@@ -44,7 +53,7 @@ export default function BlogTeaser({ blog }) {
       <Box p={15}>
         <Flex positoin="relative">
           <Box w="60%">
-            <Link href={`/blog/${blog.id}`} _hover={{ textDecoration: 'none' }}>
+            <Link href={`/blog/${blog.id}`} _hover={{ textDecoration: "none" }}>
               <Text fontWeight="bold" fontFamily="body" fontSize={16}>
                 {blog.title}
               </Text>
@@ -52,13 +61,13 @@ export default function BlogTeaser({ blog }) {
                 {blog.body.value.length > 250
                   ? blog.body.value
                       .slice(0, 250)
-                      .replace(/<\/?[^>]+(>|$)/g, '') + '...'
-                  : blog.body.value.replace(/<\/?[^>]+(>|$)/g, '')}
+                      .replace(/<\/?[^>]+(>|$)/g, "") + "..."
+                  : blog.body.value.replace(/<\/?[^>]+(>|$)/g, "")}
               </Text>
             </Link>
           </Box>
           <Box mt={1}>
-            <button onClick={handleBookmarkSave} style={{ outline: 'none' }}>
+            <button onClick={handleBookmarkSave} style={{ outline: "none" }}>
               {bookmark ? (
                 <BsBookmarkFill size={17} />
               ) : (
@@ -70,9 +79,9 @@ export default function BlogTeaser({ blog }) {
             <Image
               position="absolute"
               right="15px"
-              w={'30%'}
-              h={'80%'}
-              maxWidth={'250px'}
+              w={"30%"}
+              h={"80%"}
+              maxWidth={"250px"}
               objectFit="fill"
               src={`http://localhost${blog.fieldImage.uri.url}`}
               borderRadius={5}
