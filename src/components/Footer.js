@@ -5,6 +5,8 @@ import {
   Heading,
   Input,
   Link,
+  List,
+  ListItem,
   Text,
   Textarea,
 } from '@chakra-ui/react';
@@ -12,8 +14,15 @@ import React from 'react';
 
 export default function Footer() {
   return (
-    <Box bg="black" w="100%" h="48vh" mt="40vh">
-      <Flex justifyContent="space-between" px={100} py={10}>
+    <Box
+      bg="black"
+      w="100%"
+      minHeight="48vh"
+      h="max-content"
+      pb="10px"
+      mt="40vh"
+    >
+      <Flex justifyContent="space-between" px={110} py={10}>
         <Heading>
           <Link
             href="/"
@@ -23,7 +32,6 @@ export default function Footer() {
             _focus={{
               outline: 'none',
             }}
-            px={10}
             color="white"
             fontFamily={'logo_font'}
             fontWeight={'bold'}
@@ -31,6 +39,14 @@ export default function Footer() {
           >
             Blog
           </Link>
+          <List fontSize={14} marginBlock="20px" color="white">
+            <ListItem mt={2}>
+              <FooterItem title="Blog Listing" href="/blogs" />
+            </ListItem>
+            <ListItem mt={2}>
+              <FooterItem title="Bookmarks" href="/bookmarks" />
+            </ListItem>
+          </List>
         </Heading>
         <Box position="relative" mr={100} mt={10}>
           <Text
@@ -50,6 +66,7 @@ export default function Footer() {
             />
             <Textarea
               mt={3}
+              maxHeight={110}
               background="white"
               fontSize="12px"
               placeholder="Message"
@@ -63,3 +80,19 @@ export default function Footer() {
     </Box>
   );
 }
+
+const FooterItem = ({ title, href }) => {
+  return (
+    <Link
+      href={href}
+      _hover={{
+        textDecoration: 'none',
+        color: 'gray.300',
+      }}
+      fontWeight="light"
+      _focus={{ outline: 'none' }}
+    >
+      {title}
+    </Link>
+  );
+};
