@@ -1,15 +1,15 @@
-import { Box, Button, Flex, Link, Text } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
-import BlogListing from '../../components/BlogListing';
-import { getLatestBlogsOffset } from '../../services/index';
-import queryString from 'query-string';
-import Loading from '../../components/Loading';
+import { Box, Button, Flex, Link, Text } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import BlogListing from "../../components/BlogListing";
+import { getLatestBlogsOffset } from "../../services/index";
+import queryString from "query-string";
+import Loading from "../../components/Loading";
 
 export default function BlogListingPage() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [links, setLinks] = useState();
-  const { page = 1 } = queryString.parse(window.location.search);
+  const { page = 1, search = "" } = queryString.parse(window.location.search);
   const numericPage = parseInt(page);
 
   const getBlogs = async () => {
@@ -22,6 +22,7 @@ export default function BlogListingPage() {
     const { data: blogs, links } = await getLatestBlogsOffset({
       offset: offsetLogic,
       limit: limitNumber,
+      search: search,
     });
     setBlogs(blogs);
     setLinks(links);
@@ -36,14 +37,21 @@ export default function BlogListingPage() {
     <>
       {blogs && !loading ? (
         <>
+          {search && (
+            <Text textAlign="center" mt="50px">
+              Showing Results for {search}
+            </Text>
+          )}
           <BlogListing blogs={blogs} />
           {links && (
             <Flex justifyContent="center" mt={50}>
               {links.prev && (
                 <Link
                   m={1}
-                  _hover={{ textDecoration: 'none' }}
-                  href={`/blogs/?page=${numericPage - 1}`}
+                  _hover={{ textDecoration: "none" }}
+                  href={`/blogs/?${search && `search=${search}&`}page=${
+                    numericPage - 1
+                  }`}
                 >
                   <Button>Prev</Button>
                 </Link>
@@ -51,8 +59,10 @@ export default function BlogListingPage() {
               {links.next && (
                 <Link
                   m={1}
-                  _hover={{ textDecoration: 'none' }}
-                  href={`/blogs/?page=${numericPage + 1}`}
+                  _hover={{ textDecoration: "none" }}
+                  href={`/blogs/?${search && `search=${search}&`}page=${
+                    numericPage + 1
+                  }`}
                 >
                   <Button>Next</Button>
                 </Link>

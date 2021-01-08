@@ -1,10 +1,10 @@
-import superagent from 'superagent';
-import superagentJsonapify from 'superagent-jsonapify';
-import { toast } from 'react-toastify';
+import superagent from "superagent";
+import superagentJsonapify from "superagent-jsonapify";
+import { toast } from "react-toastify";
 
 superagentJsonapify(superagent);
 
-const apiUrl = 'http://localhost/omedia-exercise/web';
+const apiUrl = "http://localhost/omedia-exercise/web";
 
 export const getLatestBlogs = async (limit = 10) => {
   try {
@@ -19,10 +19,14 @@ export const getLatestBlogs = async (limit = 10) => {
   }
 };
 
-export const getLatestBlogsOffset = async ({ offset = '', limit = 10 }) => {
+export const getLatestBlogsOffset = async ({
+  offset = "",
+  limit = 10,
+  search = "",
+}) => {
   try {
     const response = await superagent.get(
-      `${apiUrl}/api/node/blog?sort=-created&page[limit]=${limit}&include=field_image,field_topic&page[offset]=${offset}`
+      `${apiUrl}/api/node/blog?sort=-created&page[limit]=${limit}&include=field_image,field_topic&page[offset]=${offset}&filter[title][operator]=CONTAINS&filter[title][value]=${search}`
     );
     const body = response.body;
     const data = body;
@@ -32,7 +36,7 @@ export const getLatestBlogsOffset = async ({ offset = '', limit = 10 }) => {
   }
 };
 
-export const getBlogById = async id => {
+export const getBlogById = async (id) => {
   try {
     const response = await superagent.get(
       `${apiUrl}/api/node/blog/${id}?include=field_image,field_topic`
@@ -41,11 +45,11 @@ export const getBlogById = async id => {
     const data = body;
     return data;
   } catch (err) {
-    toast.error(err.status + ' ' + err.message);
+    toast.error(err.status + " " + err.message);
   }
 };
 
-export const getBlogsByTopic = async topic => {
+export const getBlogsByTopic = async (topic) => {
   const response = await superagent.get(
     `${apiUrl}/api/node/blog?filter[field_topic.name][value]=${topic}&include=field_image,field_topic`
   );
