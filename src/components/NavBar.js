@@ -10,6 +10,7 @@ import {
   Input,
   InputRightElement,
   Button,
+  Stack,
 } from "@chakra-ui/react";
 import { ColorModeSwitcher } from "../ColorModeSwitcher";
 
@@ -46,16 +47,16 @@ export default function NavBar() {
           Blog
         </Link>
       </Heading>
-      <Flex>
+      <Stack spacing={5} isInline>
         <Link
           href="/blogs"
           _hover={{ textDecoration: "none" }}
           _focus={{ outline: "none" }}
-          px={10}
           alignSelf="center"
           fontSize={12}
           fontFamily={"heading"}
           fontWeight={600}
+          width={150}
         >
           Blogs Listing
         </Link>
@@ -77,7 +78,6 @@ export default function NavBar() {
             </Link>
           </Text>
         </Box>
-        <ColorModeSwitcher />
         <InputGroup>
           <Input
             type="text"
@@ -94,7 +94,8 @@ export default function NavBar() {
             </Link>
           </InputRightElement>
         </InputGroup>
-      </Flex>
+        <ColorModeSwitcher />
+      </Stack>
     </Flex>
   );
 }
