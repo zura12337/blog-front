@@ -32,6 +32,16 @@ export const getBlogById = async id => {
   return data;
 };
 
+export const getBlogsByTopic = async topic => {
+  const response = await superagent.get(
+    `${apiUrl}/api/node/blog?filter[field_topic.name][value]=${topic}&include=field_image,field_topic`
+  );
+  const body = response.body;
+  console.log(body);
+  const data = body;
+  return data;
+};
+
 export const getTopics = async () => {
   const response = await superagent.get(
     `${apiUrl}/api/taxonomy_term/topic?sort=weight`

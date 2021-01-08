@@ -1,21 +1,30 @@
-import { Box, Flex, Image, Text } from '@chakra-ui/react';
+import { Box, Image, Text } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
+import Loading from '../../components/Loading';
+
 import { getBlogById } from '../../services/index';
 
 export default function BlogPage({ match }) {
   const [blog, setBlog] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const id = match.params.id;
 
   const getBlog = async () => {
+    setLoading(true);
     const { data: blog } = await getBlogById(id);
     blog[0].body.value = blog[0].body.value.replace(/<\/?[^>]+(>|$)/g, '');
     setBlog(blog[0]);
+    setLoading(false);
   };
 
   useEffect(() => {
     getBlog();
   }, []);
+
+  if (loading) {
+    return <Loading loading={loading} />;
+  }
 
   return (
     <>

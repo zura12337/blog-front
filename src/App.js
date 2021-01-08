@@ -8,6 +8,7 @@ import HomePage from './pages/home/index';
 import BlogPage from './pages/blog';
 import BlogListingPage from './pages/blogs';
 import BookmarksPage from './pages/bookmarks';
+import BlogsByTopicPage from './pages/blogs-by-topic';
 
 const theme = extendTheme({
   colors: {
@@ -38,6 +39,7 @@ function App() {
       <Switch>
         <Route path="/bookmarks" component={BookmarksPage} />
         <Route path="/blogs/" component={BlogListingPage} />
+        <Route path="/topic/:topic" component={BlogsByTopicPage} />
         <Route path="/blog/:id" component={BlogPage} />
         <Route path="/" component={HomePage} />
       </Switch>
