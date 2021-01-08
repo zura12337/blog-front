@@ -1,13 +1,15 @@
-import { Box, Flex, Link, Text } from '@chakra-ui/react';
-import React from 'react';
-import { Slide } from 'react-slideshow-image';
-import { RiNewspaperFill } from 'react-icons/ri';
+import { Box, Flex, Link, Text, useColorModeValue } from "@chakra-ui/react";
+import React from "react";
+import { Slide } from "react-slideshow-image";
+import { RiNewspaperFill } from "react-icons/ri";
 
 export default function Slider({ latestBlogs }) {
+  const icon = useColorModeValue("black", "white");
+
   return (
     <Box h="90vh" w="60vw" ml="20vw" mt="10vh" backgroundColor="gray">
       <Flex h="40px">
-        <RiNewspaperFill fill="#232323" size="18px" />
+        <RiNewspaperFill fill={icon} size="18px" />
         <Text
           fontWeight="bold"
           display="flex"
@@ -26,16 +28,16 @@ export default function Slider({ latestBlogs }) {
           boxShadow="0 2px 5px rgba(0,0,0,.25)"
         >
           <Slide>
-            {latestBlogs.map(blog => (
+            {latestBlogs.map((blog) => (
               <Link
                 key={blog.id}
-                _hover={{ textDecoration: 'none' }}
+                _hover={{ textDecoration: "none" }}
                 textDecoration="none"
                 href={`/blog/${blog.id}`}
               >
                 <Flex
                   alignItems="flex-end"
-                  h={'70vh'}
+                  h={"70vh"}
                   backgroundImage={`linear-gradient(0deg, rgba(0,0,0,.45) 0%, rgba(255,255,255,0) 100%), url(http://localhost${blog.fieldImage.uri.url})`}
                   backgroundSize="cover"
                 >
