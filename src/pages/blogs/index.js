@@ -34,41 +34,39 @@ export default function BlogListingPage() {
 
   return (
     <>
-      <Box w={'60%'} m="auto" mt={'80px'}>
-        {blogs && !loading ? (
-          <>
-            <BlogListing blogs={blogs} />
-            {links && (
-              <Flex justifyContent="center" mt={50}>
-                {links.prev && (
-                  <Link
-                    m={1}
-                    _hover={{ textDecoration: 'none' }}
-                    href={`/blogs/?page=${numericPage - 1}`}
-                  >
-                    <Button>Prev</Button>
-                  </Link>
-                )}
-                {links.next && (
-                  <Link
-                    m={1}
-                    _hover={{ textDecoration: 'none' }}
-                    href={`/blogs/?page=${numericPage + 1}`}
-                  >
-                    <Button>Next</Button>
-                  </Link>
-                )}
-              </Flex>
-            )}
-          </>
-        ) : !loading ? (
-          <Text textAlign="center" fontSize={30}>
-            No Blogs Posted Yet.
-          </Text>
-        ) : (
-          <Loading loading={loading} />
-        )}
-      </Box>
+      {blogs && !loading ? (
+        <>
+          <BlogListing blogs={blogs} />
+          {links && (
+            <Flex justifyContent="center" mt={50}>
+              {links.prev && (
+                <Link
+                  m={1}
+                  _hover={{ textDecoration: 'none' }}
+                  href={`/blogs/?page=${numericPage - 1}`}
+                >
+                  <Button>Prev</Button>
+                </Link>
+              )}
+              {links.next && (
+                <Link
+                  m={1}
+                  _hover={{ textDecoration: 'none' }}
+                  href={`/blogs/?page=${numericPage + 1}`}
+                >
+                  <Button>Next</Button>
+                </Link>
+              )}
+            </Flex>
+          )}
+        </>
+      ) : !loading ? (
+        <Text textAlign="center" fontSize={30}>
+          No Blogs Posted Yet.
+        </Text>
+      ) : (
+        <Loading loading={loading} />
+      )}
     </>
   );
 }

@@ -1,4 +1,12 @@
-import { Box, Button, Flex, Link, useColorModeValue } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  Grid,
+  GridItem,
+  Link,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
 import BlogListing from '../../components/BlogListing';
 import Slider from '../../components/Slider';
@@ -33,11 +41,20 @@ export default function HomePage() {
     <>
       <Loading loading={loading} />
       <Slider latestBlogs={latestBlogs} />
-      <Flex pt={50} px={100} background={background} borderTop="1px solid gray">
-        <BlogListing blogs={blogs} />
-        <Topics topics={topics} />
-      </Flex>
-      <Box py={10} px={'25%'} background={background}>
+      <Grid
+        templateColumns="2fr 1fr"
+        pt={50}
+        background={background}
+        borderTop="1px solid gray"
+      >
+        <GridItem>
+          <BlogListing blogs={blogs} />
+        </GridItem>
+        <GridItem mt={'80px'}>
+          <Topics topics={topics} />
+        </GridItem>
+      </Grid>
+      <Box py={10} px={'28%'} background={background}>
         <Link _hover={{ textDecoration: 'none' }} href="/blogs">
           <Button>See More</Button>
         </Link>

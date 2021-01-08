@@ -1,6 +1,6 @@
-import { Box } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import BlogTeaser from '../../components/BlogTeaser';
+import BlogListing from '../../components/BlogListing';
+import Loading from '../../components/Loading';
 import { getBlogsByTopic } from '../../services/index';
 
 export default function BlogsByTopicPage({ match }) {
@@ -17,9 +17,5 @@ export default function BlogsByTopicPage({ match }) {
     getBlogs();
   }, []);
 
-  return (
-    <Box w={'60%'} m={'auto'} mt={'80px'}>
-      {blogs && blogs.map(blog => <BlogTeaser blog={blog} />)}
-    </Box>
-  );
+  return blogs ? <BlogListing blogs={blogs} /> : <Loading loading={true} />;
 }

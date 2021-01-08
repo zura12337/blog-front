@@ -72,6 +72,7 @@ export default function BlogTeaser({ blog }) {
               right="15px"
               w={'30%'}
               h={'80%'}
+              maxWidth={'250px'}
               objectFit="fill"
               src={`http://localhost${blog.fieldImage.uri.url}`}
               borderRadius={5}

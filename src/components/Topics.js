@@ -9,7 +9,8 @@ export default function Topics({ topics }) {
       px={'35px'}
       py={15}
       backgroundColor={'gray.100'}
-      h={200}
+      minHeight={200}
+      h={'max-content'}
     >
       <Text textTransform="uppercase" letterSpacing={-0.5} fontSize={14}>
         Discover More
