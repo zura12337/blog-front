@@ -1,7 +1,8 @@
-import { Box, Image, Text } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
-import Loading from '../../components/Loading';
-import { getBlogById } from '../../services/index';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Box, Image, Text } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import Loading from "../../components/Loading";
+import { getBlogById } from "../../services/index";
 
 export default function BlogPage({ match }) {
   const [blog, setBlog] = useState({});
@@ -14,7 +15,7 @@ export default function BlogPage({ match }) {
     const { data: blog } = (await getBlogById(id)) || {};
     if (blog) {
       blog.body.value =
-        blog && blog.body && blog.body.value.replace(/<\/?[^>]+(>|$)/g, '');
+        blog && blog.body && blog.body.value.replace(/<\/?[^>]+(>|$)/g, "");
     }
     setBlog(blog);
     setLoading(false);
@@ -36,13 +37,13 @@ export default function BlogPage({ match }) {
             {blog.fieldImage && (
               <Image
                 src={`http://localhost${blog.fieldImage.uri.url}`}
-                w={'100vw'}
+                w={"100vw"}
                 h="500px"
                 objectFit="cover"
               />
             )}
           </Box>
-          <Box w={'60%'} m="auto">
+          <Box w={"60%"} m="auto">
             <Text mb={30} fontSize={48}>
               {blog.title}
             </Text>
@@ -52,11 +53,11 @@ export default function BlogPage({ match }) {
                   {blog.body.value[0]}
                 </Text>
                 <Text float="left" lineHeight="0.6" fontSize={28}>
-                  {blog.body.value.slice(1).split(' ').slice(0, 5).join(' ')}
+                  {blog.body.value.slice(1).split(" ").slice(0, 5).join(" ")}
                 </Text>
                 <br />
                 <Text fontSize={14} color="gray.dark">
-                  {blog.body.value.split(' ').slice(5).join(' ')}
+                  {blog.body.value.split(" ").slice(5).join(" ")}
                 </Text>
               </Box>
             )}

@@ -1,4 +1,5 @@
-import { Box, Button, Flex, Link, Text } from "@chakra-ui/react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Button, Flex, Link, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import BlogListing from "../../components/BlogListing";
 import { getLatestBlogsOffset } from "../../services/index";

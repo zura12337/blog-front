@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import BlogListing from '../../components/BlogListing';
-import Loading from '../../components/Loading';
-import { getBlogsByTopic } from '../../services/index';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
+import BlogListing from "../../components/BlogListing";
+import Loading from "../../components/Loading";
+import { getBlogsByTopic } from "../../services/index";
 
 export default function BlogsByTopicPage({ match }) {
   const [blogs, setBlogs] = useState();

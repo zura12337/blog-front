@@ -1,12 +1,11 @@
-import { Box } from '@chakra-ui/react';
-import React from 'react';
-import BlogListing from '../../components/BlogListing';
-import BlogTeaser from '../../components/BlogTeaser';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
+/* eslint-disable no-unused-vars */
+import React from "react";
+import BlogListing from "../../components/BlogListing";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 export default function BookmarksPage() {
   const [bookmarkedBlogs, setBookmarkedBlogs] = useLocalStorage(
-    'bookmarks',
+    "bookmarks",
     []
   );
 
