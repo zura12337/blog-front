@@ -12,13 +12,7 @@ export default function BookmarksPage() {
   return (
     <Box w={'60%'} m={'auto'} mt="80px">
       {bookmarkedBlogs &&
-        bookmarkedBlogs.map(blog => (
-          <BlogTeaser
-            blog={blog}
-            bookmarkedBlogs={bookmarkedBlogs}
-            setBookmarkedBlogs={setBookmarkedBlogs}
-          />
-        ))}
+        bookmarkedBlogs.map(blog => <BlogTeaser blog={blog} />)}
     </Box>
   );
 }
