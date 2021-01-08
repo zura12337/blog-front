@@ -10,6 +10,9 @@ import BlogListingPage from './pages/blogs';
 import BookmarksPage from './pages/bookmarks';
 import BlogsByTopicPage from './pages/blogs-by-topic';
 
+import { BookmarksContext } from './context/index';
+import { useLocalStorage } from './hooks/useLocalStorage';
+
 const theme = extendTheme({
   colors: {
     transparent: 'transparent',
@@ -32,17 +35,26 @@ const theme = extendTheme({
 });
 
 function App() {
+  const [bookmarkedBlogs, setBookmarkedBlogs] = useLocalStorage(
+    'bookmarks',
+    []
+  );
+
   return (
     <ChakraProvider theme={theme}>
       <Fonts />
       <NavBar />
-      <Switch>
-        <Route path="/bookmarks" component={BookmarksPage} />
-        <Route path="/blogs/" component={BlogListingPage} />
-        <Route path="/topic/:topic" component={BlogsByTopicPage} />
-        <Route path="/blog/:id" component={BlogPage} />
-        <Route path="/" component={HomePage} />
-      </Switch>
+      <BookmarksContext.Provider
+        value={{ bookmarkedBlogs, setBookmarkedBlogs }}
+      >
+        <Switch>
+          <Route path="/bookmarks" component={BookmarksPage} />
+          <Route path="/blogs/" component={BlogListingPage} />
+          <Route path="/topic/:topic" component={BlogsByTopicPage} />
+          <Route path="/blog/:id" component={BlogPage} />
+          <Route path="/" component={HomePage} />
+        </Switch>
+      </BookmarksContext.Provider>
       <Footer />
     </ChakraProvider>
   );

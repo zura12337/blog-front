@@ -1,13 +1,12 @@
 import { Box, Flex, Image, Link, Text } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { BsBookmarkPlus, BsBookmarkFill } from 'react-icons/bs';
 
-export default function BlogTeaser({
-  blog,
-  setBookmarkedBlogs,
-  bookmarkedBlogs,
-}) {
+import { BookmarksContext } from '../context/index';
+
+export default function BlogTeaser({ blog }) {
   const [bookmark, setBookmark] = useState(false);
+  const { bookmarkedBlogs, setBookmarkedBlogs } = useContext(BookmarksContext);
 
   useEffect(() => {
     for (let bookmarkedBlog of bookmarkedBlogs) {
