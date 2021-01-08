@@ -19,6 +19,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-slideshow-image": "^3.4.3",
+    "react-toastify": "^6.2.0",
     "superagent": "^6.1.0",
     "superagent-jsonapify": "^1.4.5",
     "web-vitals": "^0.2.4"
