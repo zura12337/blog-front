@@ -61,7 +61,14 @@ export default function NavBar() {
         >
           Blogs Listing
         </Link>
-        <Box py={2} px={10} bg={btnBg} justifySelf="flex-end" borderRadius={5}>
+        <Box
+          py={"8px"}
+          h="max-content"
+          px={5}
+          bg={btnBg}
+          justifySelf="flex-end"
+          borderRadius={5}
+        >
           <Link
             _hover={{
               textDecoration: "none",
@@ -79,8 +86,9 @@ export default function NavBar() {
         </Box>
         {auth && (
           <Box
-            py={2}
-            px={10}
+            py={"8px"}
+            h="max-content"
+            px={5}
             bg={btnBg}
             justifySelf="flex-end"
             borderRadius={5}

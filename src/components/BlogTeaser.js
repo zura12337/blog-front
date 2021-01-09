@@ -76,20 +76,27 @@ export default function BlogTeaser({ blog }) {
               )}
             </button>
           </Box>
-          <Box>
-            <Image
-              position="absolute"
-              right="15px"
-              w={"30%"}
-              h={"80%"}
-              maxWidth={"250px"}
-              objectFit="fill"
-              src={`http://localhost${blog.fieldImage.uri.url}`}
-              borderRadius={5}
-              boxShadow="0 0 5px rgba(0,0,0,.4)"
-              alt="blog-teaser-img"
-            />
-          </Box>
+          <Link
+            href={`/blog/${blog.id}`}
+            _focus={{ outline: "none" }}
+            _hover={{ textDecoration: "none" }}
+          >
+            <Box>
+              <Image
+                position="absolute"
+                right="15px"
+                w={"30%"}
+                h={"80%"}
+                minWidth={"200px"}
+                maxWidth={"250px"}
+                objectFit="fill"
+                src={`http://localhost${blog.fieldImage.uri.url}`}
+                borderRadius={5}
+                boxShadow="0 0 5px rgba(0,0,0,.4)"
+                alt="blog-teaser-img"
+              />
+            </Box>
+          </Link>
         </Flex>
       </Box>
     </Box>
