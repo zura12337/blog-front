@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { Box, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import BlogListing from "../../components/BlogListing";
 import Loading from "../../components/Loading";
@@ -18,5 +19,16 @@ export default function BlogsByTopicPage({ match }) {
     getBlogs();
   }, []);
 
-  return blogs ? <BlogListing blogs={blogs} /> : <Loading loading={true} />;
+  return blogs ? (
+    <Box mt={50}>
+      {blogs.length > 0 && (
+        <Text fontSize={24} textAlign="center">
+          Showing Blogs about {topic}
+        </Text>
+      )}
+      <BlogListing blogs={blogs} />
+    </Box>
+  ) : (
+    <Loading loading={true} />
+  );
 }
