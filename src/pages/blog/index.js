@@ -50,16 +50,32 @@ export default function BlogPage({ match }) {
             </Text>
             {blog.body && (
               <Box textAlign="left" mt={50}>
-                <Text float="left" lineHeight="0.1" fontSize={45}>
-                  {blog.body.value[0]}
-                </Text>
-                <Text float="left" lineHeight="0.6" fontSize={28}>
-                  {blog.body.value.slice(1).split(" ").slice(0, 5).join(" ")}
-                </Text>
+                <Text
+                  float="left"
+                  lineHeight="0.1"
+                  fontSize={45}
+                  dangerouslySetInnerHTML={{ __html: blog.body.value[0] }}
+                ></Text>
+                <Text
+                  float="left"
+                  lineHeight="0.6"
+                  fontSize={28}
+                  dangerouslySetInnerHTML={{
+                    __html: blog.body.value
+                      .slice(1)
+                      .split(" ")
+                      .slice(0, 5)
+                      .join(" "),
+                  }}
+                ></Text>
                 <br />
-                <Text fontSize={14} color="gray.dark">
-                  {blog.body.value.split(" ").slice(5).join(" ")}
-                </Text>
+                <Text
+                  fontSize={14}
+                  color="gray.dark"
+                  dangerouslySetInnerHTML={{
+                    __html: blog.body.value.split(" ").slice(5).join(" "),
+                  }}
+                ></Text>
               </Box>
             )}
             {blog.fieldTopic && (

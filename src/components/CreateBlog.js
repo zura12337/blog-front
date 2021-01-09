@@ -73,10 +73,16 @@ export default function CreateBlog() {
     setBlog({ ...blog, [name]: e.target.value });
   };
 
+  const handleCKEDitorChange = (e) => {
+    console.log(e);
+    console.log(e.target);
+  };
+
   const handleSubmit = async (e) => {
     if (JSON.stringify(errors) === "{}") {
       let newBlogObject = { ...blog };
       await newBlog({ blog: newBlogObject, token });
+      window.location.replace("/");
     }
   };
 
@@ -110,7 +116,7 @@ export default function CreateBlog() {
         />
         <FormTextarea
           name="body"
-          onChange={handleChange}
+          onChange={handleCKEDitorChange}
           label="Body"
           error={errors.body}
         />
