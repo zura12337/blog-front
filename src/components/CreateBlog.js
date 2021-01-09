@@ -81,6 +81,7 @@ export default function CreateBlog() {
   };
 
   const handleTopicChange = (e) => {
+    if (!e) return;
     e.forEach((topic) => {
       if (blog["topics"]) {
         setBlog({ ...blog, topics: [...blog["topics"], topic.value] });
