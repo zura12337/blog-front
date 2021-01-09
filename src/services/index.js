@@ -171,7 +171,9 @@ export const newBlog = async ({ blog, token }) => {
         Authorization: token,
       },
     });
-    console.log(response);
+    if (response.statusText === "Created") {
+      window.location.replace("/");
+    }
   } catch (err) {
     toast.error(err.message);
   }

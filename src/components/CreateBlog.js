@@ -74,15 +74,20 @@ export default function CreateBlog() {
   };
 
   const handleCKEDitorChange = (e) => {
-    console.log(e);
-    console.log(e.target);
+    if (e.editor.getData() === "") {
+      setErrors({ ...errors, body: "This input is required." });
+    } else {
+      let newErrors = errors;
+      delete errors.body;
+      setErrors(newErrors);
+    }
+    setBlog((blog) => ({ ...blog, body: e.editor.getData() }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     if (JSON.stringify(errors) === "{}") {
       let newBlogObject = { ...blog };
       await newBlog({ blog: newBlogObject, token });
-      window.location.replace("/");
     }
   };
 
@@ -119,6 +124,7 @@ export default function CreateBlog() {
           onChange={handleCKEDitorChange}
           label="Body"
           error={errors.body}
+          content={blog.body}
         />
         <FormSelect
           onChange={handleTopicChange}

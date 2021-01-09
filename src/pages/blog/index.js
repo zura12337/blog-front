@@ -14,10 +14,8 @@ export default function BlogPage({ match }) {
   const getBlog = async () => {
     setLoading(true);
     const { data: blog } = (await getBlogById(id)) || {};
-    if (blog) {
-      blog.body.value =
-        blog && blog.body && blog.body.value.replace(/<\/?[^>]+(>|$)/g, "");
-    }
+    const strippedBody = blog.body.value.replace(/(<([^>]+)>)/gi, "");
+    blog.strippedBody = strippedBody;
     setBlog(blog);
     setLoading(false);
   };
@@ -54,14 +52,14 @@ export default function BlogPage({ match }) {
                   float="left"
                   lineHeight="0.1"
                   fontSize={45}
-                  dangerouslySetInnerHTML={{ __html: blog.body.value[0] }}
+                  dangerouslySetInnerHTML={{ __html: blog.strippedBody[0] }}
                 ></Text>
                 <Text
                   float="left"
                   lineHeight="0.6"
                   fontSize={28}
                   dangerouslySetInnerHTML={{
-                    __html: blog.body.value
+                    __html: blog.strippedBody
                       .slice(1)
                       .split(" ")
                       .slice(0, 5)
