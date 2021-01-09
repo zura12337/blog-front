@@ -102,22 +102,73 @@ export const getUser = () => {
 };
 
 export const uploadImage = async ({
-  imgUrl = "",
+  binaryStr = "",
   token = "",
   imgName = "uploaded_image.jpg",
 }) => {
   try {
-    const { data } = await axios({
+    const response = await axios({
       method: "POST",
       url: `${apiUrl}/api/node/blog/field_image`,
-      data: Buffer.from(imgUrl),
+      data: binaryStr,
       headers: {
         "Content-Type": "application/octet-stream",
         Authorization: token,
         "Content-Disposition": `file; filename="${imgName}"`,
       },
     });
-    toast.success("Image Uploaded Succesfully");
+    const body = response.data;
+    const data = body.data;
+    return data;
+  } catch (err) {
+    toast.error(err.message);
+  }
+};
+
+export const newBlog = async ({ blog, token }) => {
+  try {
+    const response = await axios({
+      method: "POST",
+      url: `${apiUrl}/api/node/blog`,
+      data: {
+        data: {
+          type: "node--blog",
+          attributes: {
+            title: blog.title,
+            body: {
+              value: blog.body,
+              format: "plain_text",
+            },
+          },
+          relationships: {
+            field_image: {
+              data: {
+                type: "file--file",
+                id: blog.imageId,
+              },
+              meta: {
+                alt: "test",
+                title: "test",
+                width: null,
+                height: null,
+              },
+            },
+            field_topic: {
+              data: {
+                type: "taxonomy_term--topic",
+                id: "912e72cc-2c83-4d40-8a45-49dabe040380",
+              },
+            },
+          },
+        },
+      },
+      headers: {
+        "Content-Type": "application/vnd.api+json",
+        Accept: "application/vnd.api+json",
+        Authorization: token,
+      },
+    });
+    console.log(response);
   } catch (err) {
     toast.error(err.message);
   }
