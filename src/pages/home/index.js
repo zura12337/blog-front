@@ -4,6 +4,7 @@ import {
   Grid,
   GridItem,
   Link,
+  Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
@@ -21,6 +22,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState(false);
 
   const background = useColorModeValue("solidWhite", "dark");
+  const backgroundcolor = useColorModeValue("gray.100", "gray.700");
 
   const getData = async () => {
     setLoading(true);
@@ -50,7 +52,20 @@ export default function HomePage() {
           <BlogListing blogs={blogs} />
         </GridItem>
         <GridItem mt={"80px"}>
-          <Topics topics={topics} />
+          <Box
+            w={"70%"}
+            borderRadius={10}
+            px={"35px"}
+            py={15}
+            backgroundColor={backgroundcolor}
+            minHeight={200}
+            h={"max-content"}
+          >
+            <Text textTransform="uppercase" letterSpacing={-0.5} fontSize={14}>
+              Discover More
+            </Text>
+            <Topics topics={topics} />
+          </Box>
         </GridItem>
       </Grid>
       <Box py={10} px={"28%"} background={background}>

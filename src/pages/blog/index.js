@@ -2,6 +2,7 @@
 import { Box, Image, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
+import Topics from "../../components/Topics";
 import { getBlogById } from "../../services/index";
 
 export default function BlogPage({ match }) {
@@ -59,6 +60,12 @@ export default function BlogPage({ match }) {
                 <Text fontSize={14} color="gray.dark">
                   {blog.body.value.split(" ").slice(5).join(" ")}
                 </Text>
+              </Box>
+            )}
+            {blog.fieldTopic && (
+              <Box textAlign="right" mt="50px">
+                <Text>Topics</Text>
+                <Topics topics={blog.fieldTopic} />
               </Box>
             )}
           </Box>
