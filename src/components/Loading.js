@@ -1,11 +1,13 @@
 import { Box, Text, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
+import ReactLoading from "react-loading";
 
 export default function Loading({ loading }) {
   const backgroundColor = useColorModeValue(
     "rgba(255,255,255,0.8)",
     "rgba(0,0,0,.8)"
   );
+  const loadingColor = useColorModeValue("black", "white");
 
   return (
     loading && (
@@ -18,16 +20,16 @@ export default function Loading({ loading }) {
         h="100vh"
         zIndex="11"
       >
-        <Text
-          textAlign="center"
+        <Box
           position="fixed"
+          w="max-content"
+          h="max-content"
           top="50%"
           left="50%"
-          transform="translate(-50%, -50%)"
-          fontSize={29}
+          transform="translate(-50%,-50%)"
         >
-          Loading...
-        </Text>
+          <ReactLoading type="spin" color={loadingColor} />
+        </Box>
       </Box>
     )
   );
