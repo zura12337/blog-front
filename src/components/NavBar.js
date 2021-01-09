@@ -13,11 +13,13 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { ColorModeSwitcher } from "../ColorModeSwitcher";
+import { getUser } from "../services/index";
 
 import { BiSearchAlt } from "react-icons/bi";
 
 export default function NavBar() {
   const [search, setSearch] = useState("");
+  const auth = getUser();
 
   const btnBg = useColorModeValue("yellow.300", "yellow.500");
   return (
@@ -56,12 +58,33 @@ export default function NavBar() {
           fontSize={12}
           fontFamily={"heading"}
           fontWeight={600}
-          width={150}
         >
           Blogs Listing
         </Link>
         <Box py={2} px={10} bg={btnBg} justifySelf="flex-end" borderRadius={5}>
-          <Text>
+          <Link
+            _hover={{
+              textDecoration: "none",
+            }}
+            _focus={{
+              outline: "none",
+            }}
+            href="/bookmarks"
+            fontFamily={"heading"}
+            fontWeight="bold"
+            fontSize={14}
+          >
+            Bookmarks
+          </Link>
+        </Box>
+        {auth && (
+          <Box
+            py={2}
+            px={10}
+            bg={btnBg}
+            justifySelf="flex-end"
+            borderRadius={5}
+          >
             <Link
               _hover={{
                 textDecoration: "none",
@@ -69,16 +92,16 @@ export default function NavBar() {
               _focus={{
                 outline: "none",
               }}
-              href="/bookmarks"
+              href="/admin/add-blog"
               fontFamily={"heading"}
               fontWeight="bold"
               fontSize={14}
             >
-              Bookmarks
+              Add New Content
             </Link>
-          </Text>
-        </Box>
-        <InputGroup>
+          </Box>
+        )}
+        <InputGroup w={"30%"}>
           <Input
             type="text"
             placeholder="Search Blogs"

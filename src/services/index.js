@@ -1,5 +1,6 @@
 import superagent from "superagent";
 import superagentJsonapify from "superagent-jsonapify";
+import axios from "axios";
 import { toast } from "react-toastify";
 
 superagentJsonapify(superagent);
@@ -66,4 +67,58 @@ export const getTopics = async () => {
   const body = response.body;
   const data = body;
   return data;
+};
+
+export const getJWT = async ({
+  username,
+  password,
+  client_id,
+  client_secret,
+  grant_type,
+}) => {
+  var auth = new FormData();
+  auth.append("username", username);
+  auth.append("password", password);
+  auth.append("client_id", client_id);
+  auth.append("client_secret", client_secret);
+  auth.append("grant_type", grant_type);
+  try {
+    const { data } = await axios({
+      method: "POST",
+      url: `${apiUrl}/oauth/token`,
+      data: auth,
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    toast.success("Successfully Authenticated");
+    return data;
+  } catch (err) {
+    toast.error(err.message);
+  }
+};
+
+export const getUser = () => {
+  const token = localStorage.getItem("access_token") || null;
+  return token;
+};
+
+export const uploadImage = async ({
+  imgUrl = "",
+  token = "",
+  imgName = "uploaded_image.jpg",
+}) => {
+  try {
+    const { data } = await axios({
+      method: "POST",
+      url: `${apiUrl}/api/node/blog/field_image`,
+      data: Buffer.from(imgUrl),
+      headers: {
+        "Content-Type": "application/octet-stream",
+        Authorization: token,
+        "Content-Disposition": `file; filename="${imgName}"`,
+      },
+    });
+    toast.success("Image Uploaded Succesfully");
+  } catch (err) {
+    toast.error(err.message);
+  }
 };
