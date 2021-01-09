@@ -127,6 +127,12 @@ export const uploadImage = async ({
 
 export const newBlog = async ({ blog, token }) => {
   try {
+    const topicArray = [];
+    if (blog.topics) {
+      blog.topics.forEach((topic) => {
+        topicArray.push({ type: "taxonomy_term--topic", id: topic });
+      });
+    }
     const response = await axios({
       method: "POST",
       url: `${apiUrl}/api/node/blog`,
@@ -154,10 +160,7 @@ export const newBlog = async ({ blog, token }) => {
               },
             },
             field_topic: {
-              data: {
-                type: "taxonomy_term--topic",
-                id: "912e72cc-2c83-4d40-8a45-49dabe040380",
-              },
+              data: topicArray,
             },
           },
         },

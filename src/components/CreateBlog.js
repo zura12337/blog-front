@@ -1,13 +1,15 @@
 import { Box, Button } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { getUser, uploadImage, newBlog } from "../services";
+import { getUser, uploadImage, newBlog, getTopics } from "../services";
 import FormField from "./common/FormField";
+import FormSelect from "./common/FormSelect";
 import FormTextarea from "./common/FormTextarea";
 
 export default function CreateBlog() {
   const [token, setToken] = useState();
   const [errors, setErrors] = useState({});
   const [blog, setBlog] = useState({});
+  const [topics, setTopics] = useState();
 
   const allowedFileExtensions = [
     "image/png",
@@ -16,8 +18,22 @@ export default function CreateBlog() {
     "image/jpeg",
   ];
 
+  const getData = async () => {
+    const { data } = await getTopics();
+    let topics = [];
+    data.forEach((topic) => {
+      const topicObj = {
+        value: topic.id,
+        label: topic.name,
+      };
+      topics.push(topicObj);
+    });
+    setTopics(topics);
+  };
+
   useEffect(() => {
     const token = getUser();
+    getData();
     setToken(token);
   }, []);
 
@@ -64,6 +80,16 @@ export default function CreateBlog() {
     }
   };
 
+  const handleTopicChange = (e) => {
+    e.forEach((topic) => {
+      if (blog["topics"]) {
+        setBlog({ ...blog, topics: [...blog["topics"], topic.value] });
+      } else {
+        setBlog({ ...blog, topics: [topic.value] });
+      }
+    });
+  };
+
   return (
     <Box py={50} w="60%" m="auto">
       <Box>
@@ -86,6 +112,12 @@ export default function CreateBlog() {
           onChange={handleChange}
           label="Body"
           error={errors.body}
+        />
+        <FormSelect
+          onChange={handleTopicChange}
+          label="Select Topic"
+          items={topics}
+          multiple={true}
         />
         <Button onClick={handleSubmit} type="submit">
           Submit
