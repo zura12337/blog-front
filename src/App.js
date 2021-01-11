@@ -16,6 +16,7 @@ import CreateBlog from "./components/CreateBlog";
 
 import { BookmarksContext } from "./context/index";
 import { useLocalStorage } from "./hooks/useLocalStorage";
+import LogoutPage from "./pages/admin/logout";
 
 require("dotenv").config();
 
@@ -60,6 +61,7 @@ function App() {
           <Route path="/blog/:id" component={BlogPage} />
           <ProtectedRoute path="/admin/add-blog" component={CreateBlog} />
           <Route path="/admin" component={AdminPage} />
+          <Route path="/logout" component={LogoutPage} />
           <Route path="/" component={HomePage} />
         </Switch>
       </BookmarksContext.Provider>

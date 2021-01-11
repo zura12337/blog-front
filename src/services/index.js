@@ -101,6 +101,14 @@ export const getUser = () => {
   return token;
 };
 
+export const logOut = () => {
+  try {
+    localStorage.removeItem("access_token");
+  } catch (err) {
+    toast.error("Can not Log out, you are unauthorized");
+  }
+};
+
 export const uploadImage = async ({
   binaryStr = "",
   token = "",
