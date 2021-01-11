@@ -1,20 +1,23 @@
 import React from "react";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { Switch, Route } from "react-router-dom";
+
 import NavBar from "./components/NavBar";
 import Fonts from "./Fonts";
 import Footer from "./components/Footer";
-import { Switch, Route } from "react-router-dom";
 import HomePage from "./pages/home/index";
 import BlogPage from "./pages/blog";
 import BlogListingPage from "./pages/blogs";
 import BookmarksPage from "./pages/bookmarks";
 import BlogsByTopicPage from "./pages/blogs-by-topic";
-
-import { BookmarksContext } from "./context/index";
-import { useLocalStorage } from "./hooks/useLocalStorage";
 import AdminPage from "./pages/admin";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import CreateBlog from "./components/CreateBlog";
+
+import { BookmarksContext } from "./context/index";
+import { useLocalStorage } from "./hooks/useLocalStorage";
+
+require("dotenv").config();
 
 const theme = extendTheme({
   colors: {

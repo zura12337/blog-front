@@ -45,6 +45,7 @@ export default function BlogTeaser({ blog }) {
     <Box
       w={"100%"}
       h={180}
+      minWidth={"600px"}
       mb={5}
       backgroundColor={backgroundcolor}
       borderRadius={10}

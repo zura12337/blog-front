@@ -16,6 +16,7 @@ export default function BlogPage({ match }) {
     const { data: blog } = (await getBlogById(id)) || {};
     const strippedBody = blog.body.value.replace(/(<([^>]+)>)/gi, "");
     blog.strippedBody = strippedBody;
+    console.log(blog);
     setBlog(blog);
     setLoading(false);
   };
@@ -42,12 +43,12 @@ export default function BlogPage({ match }) {
               />
             )}
           </Box>
-          <Box w={"60%"} m="auto">
-            <Text mb={30} fontSize={48}>
+          <Box w={"50%"} m="auto">
+            <Text mb={30} fontFamily={"logo_font"} fontSize={48}>
               {blog.title}
             </Text>
             {blog.body && (
-              <Box textAlign="left" mt={50}>
+              <Box textAlign="left" fontFamily="lato" fontWeight="500" mt={50}>
                 <Text
                   float="left"
                   lineHeight="0.1"
@@ -77,9 +78,14 @@ export default function BlogPage({ match }) {
               </Box>
             )}
             {blog.fieldTopic && (
-              <Box textAlign="right" mt="50px">
+              <Box textAlign="right" float="right" mt="50px" maxWidth="250px">
                 <Text>Topics</Text>
                 <Topics topics={blog.fieldTopic} />
+              </Box>
+            )}
+            {blog.uid && (
+              <Box mt="50px" textAlign="left" float="left">
+                <Text>Posted By {blog.uid.attributes.display_name}</Text>
               </Box>
             )}
           </Box>

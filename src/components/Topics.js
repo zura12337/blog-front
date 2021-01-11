@@ -25,6 +25,7 @@ export default function Topics({ topics, ...rest }) {
           h="max-content"
           verticalAlign="center"
           lineHeight="normal"
+          maxWidth="260px"
         >
           <Text fontSize={12}>{topic.name}</Text>
         </Link>

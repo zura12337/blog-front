@@ -5,12 +5,12 @@ import { toast } from "react-toastify";
 
 superagentJsonapify(superagent);
 
-const apiUrl = "http://localhost/omedia-exercise/web";
+const apiUrl = process.env.REACT_APP_API_URL;
 
 export const getLatestBlogs = async (limit = 10) => {
   try {
     const response = await superagent.get(
-      `${apiUrl}/api/node/blog?sort=-created&page[limit]=${limit}&include=field_image,field_topic`
+      `${apiUrl}/api/node/blog?sort=-created&page[limit]=${limit}&include=field_image,field_topic,uid`
     );
     const body = response.body;
     const data = body;
@@ -27,7 +27,7 @@ export const getLatestBlogsOffset = async ({
 }) => {
   try {
     const response = await superagent.get(
-      `${apiUrl}/api/node/blog?sort=-created&page[limit]=${limit}&include=field_image,field_topic&page[offset]=${offset}&filter[title][operator]=CONTAINS&filter[title][value]=${search}`
+      `${apiUrl}/api/node/blog?sort=-created&page[limit]=${limit}&include=field_image,field_topic,uid&page[offset]=${offset}&filter[title][operator]=CONTAINS&filter[title][value]=${search}`
     );
     const body = response.body;
     const data = body;
@@ -40,7 +40,7 @@ export const getLatestBlogsOffset = async ({
 export const getBlogById = async (id) => {
   try {
     const response = await superagent.get(
-      `${apiUrl}/api/node/blog/${id}?include=field_image,field_topic`
+      `${apiUrl}/api/node/blog/${id}?include=field_image,field_topic,uid`
     );
     const body = response.body;
     const data = body;
@@ -52,7 +52,7 @@ export const getBlogById = async (id) => {
 
 export const getBlogsByTopic = async (topic) => {
   const response = await superagent.get(
-    `${apiUrl}/api/node/blog?filter[field_topic.name][value]=${topic}&include=field_image,field_topic`
+    `${apiUrl}/api/node/blog?filter[field_topic.name][value]=${topic}&include=field_image,field_topic,uid`
   );
   const body = response.body;
   console.log(body);
