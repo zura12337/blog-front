@@ -4,7 +4,6 @@ import {
   Flex,
   Link,
   Heading,
-  Text,
   useColorModeValue,
   InputGroup,
   Input,
@@ -50,65 +49,8 @@ export default function NavBar() {
         </Link>
       </Heading>
       <Stack spacing={5} isInline>
-        <Link
-          href="/blogs"
-          _hover={{ textDecoration: "none" }}
-          _focus={{ outline: "none" }}
-          alignSelf="center"
-          fontSize={12}
-          fontFamily={"heading"}
-          fontWeight={600}
-        >
-          Blogs Listing
-        </Link>
-        <Box
-          py={"8px"}
-          h="max-content"
-          px={5}
-          bg={btnBg}
-          justifySelf="flex-end"
-          borderRadius={5}
-        >
-          <Link
-            _hover={{
-              textDecoration: "none",
-            }}
-            _focus={{
-              outline: "none",
-            }}
-            href="/bookmarks"
-            fontFamily={"heading"}
-            fontWeight="bold"
-            fontSize={14}
-          >
-            Bookmarks
-          </Link>
-        </Box>
-        {auth && (
-          <Box
-            py={"8px"}
-            h="max-content"
-            px={5}
-            bg={btnBg}
-            justifySelf="flex-end"
-            borderRadius={5}
-          >
-            <Link
-              _hover={{
-                textDecoration: "none",
-              }}
-              _focus={{
-                outline: "none",
-              }}
-              href="/admin/add-blog"
-              fontFamily={"heading"}
-              fontWeight="bold"
-              fontSize={14}
-            >
-              Add New Content
-            </Link>
-          </Box>
-        )}
+        <NavLink withBg={false} title="Blogs Listing" href="/blogs" />
+        <NavLink title="Bookmarks" href="/bookmarks" />
         <InputGroup w={"30%"}>
           <Input
             type="text"
@@ -125,8 +67,43 @@ export default function NavBar() {
             </Link>
           </InputRightElement>
         </InputGroup>
+        {auth && (
+          <>
+            <NavLink title="Add Content" href="/admin/add-blog" />
+            <NavLink title="Logout" href="/logout" />
+          </>
+        )}
         <ColorModeSwitcher />
       </Stack>
     </Flex>
   );
 }
+
+const NavLink = ({ title, href, withBg = true }) => {
+  const btnBg = useColorModeValue("yellow.300", "yellow.500");
+  return (
+    <Box
+      py={"8px"}
+      h="max-content"
+      px={5}
+      bg={withBg ? btnBg : "transparent"}
+      justifySelf="flex-end"
+      borderRadius={5}
+    >
+      <Link
+        _hover={{
+          textDecoration: "none",
+        }}
+        _focus={{
+          outline: "none",
+        }}
+        href={href}
+        fontFamily={"heading"}
+        fontWeight="bold"
+        fontSize={14}
+      >
+        {title}
+      </Link>
+    </Box>
+  );
+};
