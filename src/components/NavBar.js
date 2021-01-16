@@ -18,7 +18,16 @@ import { BiSearchAlt } from "react-icons/bi";
 
 export default function NavBar() {
   const [search, setSearch] = useState("");
+  const [searchWidth, setSearchWidth] = useState("30%");
   const auth = getUser();
+
+  const changeSearchWidth = () => {
+    if (searchWidth === "30%") {
+      setSearchWidth("40%");
+    } else {
+      setSearchWidth("30%");
+    }
+  };
 
   const btnBg = useColorModeValue("yellow.300", "yellow.500");
   return (
@@ -51,7 +60,13 @@ export default function NavBar() {
       <Stack spacing={5} isInline>
         <NavLink withBg={false} title="Blogs Listing" href="/blogs" />
         <NavLink title="Bookmarks" href="/bookmarks" />
-        <InputGroup w={"30%"}>
+        <InputGroup
+          transition="ease"
+          transitionDuration="200ms"
+          onBlur={() => changeSearchWidth()}
+          onFocus={() => changeSearchWidth()}
+          w={searchWidth}
+        >
           <Input
             type="text"
             placeholder="Search Blogs"
