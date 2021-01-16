@@ -1,13 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Image, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
 import Topics from "../../components/Topics";
 import { getBlogById } from "../../services/index";
+import { AiFillCloseCircle } from "react-icons/ai";
 
 export default function BlogPage({ match }) {
   const [blog, setBlog] = useState({});
   const [loading, setLoading] = useState(false);
+  const [imageZoomed, setImageZoomed] = useState(false);
 
   const id = match.params.id;
 
@@ -34,14 +36,51 @@ export default function BlogPage({ match }) {
       {blog && (
         <Box textAlign="center">
           <Box mb={50}>
-            {blog.fieldImage && (
-              <Image
-                src={`http://localhost${blog.fieldImage.uri.url}`}
-                w={"100vw"}
-                h="500px"
-                objectFit="cover"
-              />
-            )}
+            {blog.fieldImage &&
+              (!imageZoomed ? (
+                <Image
+                  cursor="zoom-in"
+                  onClick={() => setImageZoomed(!imageZoomed)}
+                  src={`http://localhost${blog.fieldImage.uri.url}`}
+                  w={"100vw"}
+                  h="500px"
+                  objectFit="cover"
+                />
+              ) : (
+                <Box
+                  w="100vw"
+                  h="100vh"
+                  bg="rgba(255,255,255,.7)"
+                  position="fixed"
+                  top="0"
+                  left="0"
+                  zIndex={11}
+                >
+                  <Box position="relative" w="max-content">
+                    <Button
+                      position="fixed"
+                      bg="none"
+                      _hover={{ background: "none" }}
+                      top="20px"
+                      right="20px"
+                      onClick={() => setImageZoomed(!imageZoomed)}
+                    >
+                      <AiFillCloseCircle size={20} color="rgba(0,0,0,.6)" />
+                    </Button>
+                    <Image
+                      position="fixed"
+                      left="15%"
+                      mt={"10vh"}
+                      cursor="zoom-in"
+                      onClick={() => setImageZoomed(!imageZoomed)}
+                      src={`http://localhost${blog.fieldImage.uri.url}`}
+                      w={"70%"}
+                      h="80vh"
+                      boxShadow="0 0 50px rgba(0,0,0,0.2)"
+                    />
+                  </Box>
+                </Box>
+              ))}
           </Box>
           <Box w={"50%"} m="auto">
             <Text mb={30} fontFamily={"logo_font"} fontSize={48}>
