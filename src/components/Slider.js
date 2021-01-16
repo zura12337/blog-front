@@ -21,7 +21,7 @@ export default function Slider({ latestBlogs }) {
           Latest News
         </Text>
       </Flex>
-      {latestBlogs && (
+      {latestBlogs.length > 0 ? (
         <Box
           borderRadius="15px"
           overflow="hidden"
@@ -55,6 +55,18 @@ export default function Slider({ latestBlogs }) {
               </Link>
             ))}
           </Slide>
+        </Box>
+      ) : (
+        <Box>
+          <Text
+            fontSize={24}
+            fontFamily={"heading"}
+            fontWeight="bold"
+            textAlign="center"
+            verticalAlign="center"
+          >
+            No Blogs
+          </Text>
         </Box>
       )}
     </Box>
