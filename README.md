@@ -3,12 +3,13 @@
 
 ### Installation 🚀
 
+Prerequisite
+- Clone this repository in apache folder https://github.com/zura12337/omedia-exercise.   
+
+
 `npm install`
 
 Change .env file
-
-Prerequisite
-- Clone this repository in apache folder https://github.com/zura12337/omedia-exercise.   
 
 `REACT_APP_API_URL=http://localhost/omedia-exercise/web`
 
