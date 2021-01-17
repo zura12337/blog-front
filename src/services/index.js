@@ -122,6 +122,7 @@ export const uploadImage = async ({
       headers: {
         "Content-Type": "application/octet-stream",
         Authorization: token,
+        Accept: "application/vnd.api+json",
         "Content-Disposition": `file; filename="${imgName}"`,
       },
     });
@@ -129,6 +130,7 @@ export const uploadImage = async ({
     const data = body.data;
     return data;
   } catch (err) {
+    console.error(err);
     toast.error(err.message);
   }
 };
@@ -182,6 +184,21 @@ export const newBlog = async ({ blog, token }) => {
     if (response.statusText === "Created") {
       window.location.replace("/");
     }
+  } catch (err) {
+    toast.error(err.message);
+  }
+};
+
+export const removeBlogById = async (id, token) => {
+  try {
+    const response = await axios({
+      method: "DELETE",
+      url: `${apiUrl}/api/node/blog/${id}`,
+      headers: {
+        Authorization: token,
+      },
+    });
+    return response;
   } catch (err) {
     toast.error(err.message);
   }

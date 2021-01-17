@@ -104,6 +104,7 @@ const NavLink = ({ title, href, withBg = true }) => {
       bg={withBg ? btnBg : "transparent"}
       justifySelf="flex-end"
       borderRadius={5}
+      minWidth={"max-content"}
     >
       <Link
         _hover={{
