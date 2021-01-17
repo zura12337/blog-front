@@ -140,7 +140,7 @@ export const newBlog = async ({ blog, token }) => {
     const topicArray = [];
     if (blog.topics) {
       blog.topics.forEach((topic) => {
-        topicArray.push({ type: "taxonomy_term--topic", id: topic });
+        topicArray.push({ type: "taxonomy_term--topic", id: topic.value });
       });
     }
     const response = await axios({

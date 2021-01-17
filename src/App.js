@@ -64,6 +64,7 @@ function App() {
             path="/admin/content-management"
             component={AdminContentManagementPage}
           />
+          <ProtectedRoute path="/admin/add-blog/:id" component={AddBlogPage} />
           <ProtectedRoute path="/admin/add-blog" component={AddBlogPage} />
           <ProtectedRoute path="/logout" component={LogoutPage} />
           <Route path="/admin" component={AdminPage} />
