@@ -51,6 +51,7 @@ export default function CreateBlog() {
           token,
           imgName: imgName,
         });
+        console.log(data);
         if (data) {
           setBlog({ ...blog, imageId: data.id });
         }
