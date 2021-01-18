@@ -1,15 +1,24 @@
 import { Box, Button } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { getUser, uploadImage, newBlog, getTopics } from "../services";
+import {
+  getUser,
+  uploadImage,
+  newBlog,
+  getTopics,
+  getBlogById,
+  updateBlog,
+} from "../services";
 import FormField from "./common/FormField";
 import FormSelect from "./common/FormSelect";
 import FormTextarea from "./common/FormTextarea";
+import Loading from "./Loading";
 
-export default function CreateBlog() {
+export default function CreateBlog({ id }) {
   const [token, setToken] = useState();
   const [errors, setErrors] = useState({});
   const [blog, setBlog] = useState({});
   const [topics, setTopics] = useState();
+  const [loading, setLoading] = useState(false);
 
   const allowedFileExtensions = [
     "image/png",
@@ -31,10 +40,37 @@ export default function CreateBlog() {
     setTopics(topics);
   };
 
+  const getBlog = async () => {
+    setLoading(true);
+    const response = await getBlogById(id);
+    let data;
+    if (response) {
+      data = response.data;
+      const topics = [];
+      data.fieldTopic.forEach((topic) => {
+        const obj = {
+          label: topic.name,
+          value: topic.id,
+        };
+        topics.push(obj);
+      });
+      setBlog({
+        title: data.title,
+        body: data.body.value,
+        topics: topics,
+        imageId: data.fieldImage.id,
+      });
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     const token = getUser();
     getData();
     setToken(token);
+    if (id) {
+      getBlog();
+    }
   }, []);
 
   const handleImageUpload = (e) => {
@@ -86,8 +122,13 @@ export default function CreateBlog() {
 
   const handleSubmit = async () => {
     if (JSON.stringify(errors) === "{}") {
-      let newBlogObject = { ...blog };
-      await newBlog({ blog: newBlogObject, token });
+      if (!id) {
+        let newBlogObject = { ...blog };
+        await newBlog({ blog: newBlogObject, token });
+      } else {
+        let newBlogObject = { ...blog };
+        await updateBlog({ blog: newBlogObject, id, token });
+      }
     }
   };
 
@@ -95,12 +136,16 @@ export default function CreateBlog() {
     if (!e) return;
     e.forEach((topic) => {
       if (blog["topics"]) {
-        setBlog({ ...blog, topics: [...blog["topics"], topic.value] });
+        setBlog({ ...blog, topics: [...blog["topics"], topic] });
       } else {
-        setBlog({ ...blog, topics: [topic.value] });
+        setBlog({ ...blog, topics: [topic] });
       }
     });
   };
+
+  if (loading) {
+    return <Loading loading={loading} />;
+  }
 
   return (
     <Box py={50} w="60%" m="auto">
@@ -111,6 +156,7 @@ export default function CreateBlog() {
           type="text"
           onChange={handleChange}
           error={errors.title}
+          value={blog.title}
         />
         <FormField
           name="image"
@@ -118,6 +164,7 @@ export default function CreateBlog() {
           type="file"
           onChange={handleImageUpload}
           error={errors.image}
+          value={blog.image}
         />
         <FormTextarea
           name="body"
@@ -131,6 +178,7 @@ export default function CreateBlog() {
           label="Select Topic"
           items={topics}
           multiple={true}
+          value={blog.topics}
         />
         <Button onClick={handleSubmit} type="submit">
           Submit

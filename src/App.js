@@ -12,12 +12,12 @@ import BookmarksPage from "./pages/bookmarks";
 import BlogsByTopicPage from "./pages/blogs-by-topic";
 import AdminPage from "./pages/admin";
 import ProtectedRoute from "./components/common/ProtectedRoute";
-import CreateBlog from "./components/CreateBlog";
 
 import { BookmarksContext } from "./context/index";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import LogoutPage from "./pages/admin/logout";
 import AddBlogPage from "./pages/admin/add-blog";
+import AdminContentManagementPage from "./pages/admin/content-management";
 
 require("dotenv").config();
 
@@ -60,6 +60,11 @@ function App() {
           <Route path="/blogs/" component={BlogListingPage} />
           <Route path="/topic/:topic" component={BlogsByTopicPage} />
           <Route path="/blog/:id" component={BlogPage} />
+          <ProtectedRoute
+            path="/admin/content-management"
+            component={AdminContentManagementPage}
+          />
+          <ProtectedRoute path="/admin/add-blog/:id" component={AddBlogPage} />
           <ProtectedRoute path="/admin/add-blog" component={AddBlogPage} />
           <ProtectedRoute path="/logout" component={LogoutPage} />
           <Route path="/admin" component={AdminPage} />

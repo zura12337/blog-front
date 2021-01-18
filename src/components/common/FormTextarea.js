@@ -4,7 +4,7 @@ import {
   FormErrorMessage,
   FormLabel,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import CKEditor from "ckeditor4-react";
 
 export default function FormTextarea({
@@ -12,13 +12,13 @@ export default function FormTextarea({
   label,
   error,
   onChange,
-  content,
+  content = "",
 }) {
   return (
     <FormControl isInvalid={error}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <Box borderRadius={10} overflow="hidden">
-        <CKEditor content={content} onChange={onChange} />
+        <CKEditor data={content} onChange={onChange} />
       </Box>
       <FormErrorMessage>{error}</FormErrorMessage>
       <br />
