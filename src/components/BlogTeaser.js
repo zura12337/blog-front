@@ -90,7 +90,7 @@ export default function BlogTeaser({ blog }) {
                 h={"80%"}
                 minWidth={"200px"}
                 maxWidth={"250px"}
-                objectFit="fill"
+                objectFit="cover"
                 src={`http://localhost${blog.fieldImage.uri.url}`}
                 borderRadius={5}
                 boxShadow="0 0 5px rgba(0,0,0,.4)"
