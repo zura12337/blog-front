@@ -6,6 +6,7 @@ import {
   newBlog,
   getTopics,
   getBlogById,
+  updateBlog,
 } from "../services";
 import FormField from "./common/FormField";
 import FormSelect from "./common/FormSelect";
@@ -41,22 +42,26 @@ export default function CreateBlog({ id }) {
 
   const getBlog = async () => {
     setLoading(true);
-    const { data } = await getBlogById(id);
-    console.log(data);
-    const topics = [];
-    data.fieldTopic.forEach((topic) => {
-      const obj = {
-        label: topic.name,
-        value: topic.id,
-      };
-      topics.push(obj);
-    });
-    setBlog({
-      title: data.title,
-      body: data.body.value,
-      topics: topics,
-    });
-    setLoading(false);
+    const response = await getBlogById(id);
+    let data;
+    if (response) {
+      data = response.data;
+      const topics = [];
+      data.fieldTopic.forEach((topic) => {
+        const obj = {
+          label: topic.name,
+          value: topic.id,
+        };
+        topics.push(obj);
+      });
+      setBlog({
+        title: data.title,
+        body: data.body.value,
+        topics: topics,
+        imageId: data.fieldImage.id,
+      });
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -82,7 +87,6 @@ export default function CreateBlog({ id }) {
           token,
           imgName: imgName,
         });
-        console.log(data);
         if (data) {
           setBlog({ ...blog, imageId: data.id });
         }
@@ -118,8 +122,13 @@ export default function CreateBlog({ id }) {
 
   const handleSubmit = async () => {
     if (JSON.stringify(errors) === "{}") {
-      let newBlogObject = { ...blog };
-      await newBlog({ blog: newBlogObject, token });
+      if (!id) {
+        let newBlogObject = { ...blog };
+        await newBlog({ blog: newBlogObject, token });
+      } else {
+        let newBlogObject = { ...blog };
+        await updateBlog({ blog: newBlogObject, id, token });
+      }
     }
   };
 

@@ -189,6 +189,59 @@ export const newBlog = async ({ blog, token }) => {
   }
 };
 
+export const updateBlog = async ({ blog, id, token }) => {
+  try {
+    const topicArray = [];
+    if (blog.topics) {
+      blog.topics.forEach((topic) => {
+        topicArray.push({ type: "taxonomy_term--topic", id: topic.value });
+      });
+    }
+    const response = await axios({
+      method: "PATCH",
+      url: `${apiUrl}/api/node/blog/${id}`,
+      data: {
+        data: {
+          type: "node--blog",
+          id: id,
+          attributes: {
+            title: blog.title,
+            body: {
+              value: blog.body,
+              format: "plain_text",
+            },
+          },
+          relationships: {
+            field_image: {
+              data: {
+                type: "file--file",
+                id: blog.imageId,
+              },
+              meta: {
+                alt: "test",
+                title: "test",
+                width: null,
+                height: null,
+              },
+            },
+            field_topic: {
+              data: topicArray,
+            },
+          },
+        },
+      },
+      headers: {
+        "Content-Type": "application/vnd.api+json",
+        Accept: "application/vnd.api+json",
+        Authorization: token,
+      },
+    });
+    console.log(response);
+  } catch (err) {
+    toast.error(err.message);
+  }
+};
+
 export const removeBlogById = async (id, token) => {
   try {
     const response = await axios({
