@@ -2,9 +2,15 @@ import { FormControl, FormLabel, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
 import Select from "react-select";
 
-export default function FormSelect({ label, items, multiple, onChange }) {
+export default function FormSelect({
+  label,
+  items,
+  multiple,
+  onChange,
+  value = "",
+}) {
   const backgroundColor = useColorModeValue("white", "#1A202C");
-  const buttonColor = useColorModeValue("gray", "#394a6b");
+  const buttonColor = useColorModeValue("white", "#394a6b");
 
   const customStyles = {
     menu: (provided, state) => ({
@@ -52,6 +58,7 @@ export default function FormSelect({ label, items, multiple, onChange }) {
           isMulti={multiple}
           styles={customStyles}
           onChange={onChange}
+          value={value}
         />
       )}
       <br />

@@ -9,12 +9,11 @@ import {
   Button,
   Link,
 } from "@chakra-ui/react";
-import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icon";
 
 import React, { useEffect, useState } from "react";
 import { getLatestBlogs, getUser, removeBlogById } from "../../services";
 import Loading from "../../components/Loading";
-import { RiDeleteBinFill } from "react-icons/ri";
+import { RiDeleteBinFill, RiEditFill } from "react-icons/ri";
 
 export default function AdminContentManagementPage() {
   const [blogs, setBlogs] = useState([]);
@@ -40,6 +39,10 @@ export default function AdminContentManagementPage() {
     if (response.status === 204) {
       getBlogs();
     }
+  };
+
+  const handleEdit = async (blogId) => {
+    window.location.replace("/admin/add-blog/" + blogId);
   };
 
   if (loading) {
@@ -71,11 +74,29 @@ export default function AdminContentManagementPage() {
                 <Td>{blog.uid.attributes.display_name}</Td>
                 <Td>
                   <Button
+                    backgroundColor="blue.500"
+                    color="white"
+                    fontFamily="heading"
+                    _hover={{
+                      backgroundColor: "blue.600",
+                    }}
+                    _active={{
+                      backgroundColor: "blue.800",
+                    }}
+                    mr="10px"
+                    onClick={() => handleEdit(blog.id)}
+                  >
+                    <RiEditFill size={20} />
+                  </Button>
+                  <Button
                     backgroundColor="red.500"
                     color="white"
                     fontFamily="heading"
                     _hover={{
                       backgroundColor: "red.600",
+                    }}
+                    _active={{
+                      backgroundColor: "red.800",
                     }}
                     onClick={() => handleRemove(blog.id)}
                   >
