@@ -4,7 +4,7 @@
 ### Installation 🚀
 
 Prerequisite
-- Clone this repository in apache folder https://github.com/zura12337/omedia-exercise and follow it's installation instruction.
+- Clone repository https://github.com/zura12337/omedia-exercise and follow installation instruction.
 
 
 `npm install`
